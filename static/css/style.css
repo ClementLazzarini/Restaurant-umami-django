@@ -1,0 +1,641 @@
+/* =======================================================
+   1. VARIABLES GLOBALES (À personnaliser par projet)
+   ======================================================= */
+:root {
+    /* --- Couleurs pour le projet "Umami" --- */
+    --primary-color: #F3EDEB;   /* Un rouge/orangé pour les accents (boutons, titres...) */
+    --secondary-color: #FFFFFF; /* Un doré/jaune pour des touches secondaires */
+    --bg-color: #F3EDEB;        /* Un fond très sombre, presque noir */
+    --surface-color: #1E1E1E;   /* Couleur pour les "surfaces" (cartes, footer...) */
+    --text-color: #0F1A1A;      /* Texte principal clair */
+    --text-muted-color: #E94223;/* Texte secondaire plus discret (ingrédients...) */
+
+    /* --- Polices (déjà adaptées à ton HTML) --- */
+    --font-primary: 'Fraunces', serif; /* Pour les titres et éléments forts */
+    --font-secondary: 'Jost', sans-serif;   /* Pour le corps de texte */
+
+    /* --- Système d'espacement (universel) --- */
+    --spacing-xs: 0.5rem;   /* 8px */
+    --spacing-sm: 1rem;     /* 16px */
+    --spacing-md: 1.5rem;   /* 24px */
+    --spacing-lg: 2rem;     /* 32px */
+    --spacing-xl: 3rem;     /* 48px */
+    --spacing-xxl: 4rem;    /* 64px */
+}
+
+
+/* =======================================================
+   2. RESET ET STYLES DE BASE (Ne change presque jamais)
+   ======================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px; /* Base pour les calculs en rem */
+}
+
+body {
+    font-family: var(--font-secondary);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    overflow-x: hidden; /* Empêche le défilement horizontal accidentel */
+    padding-top: 92px; /* <- AJOUT IMPORTANT ICI */
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-primary);
+    line-height: 1.2;
+    margin-bottom: var(--spacing-sm);
+}
+
+h1 { 
+    font-size: 2.75rem; 
+    font-weight: 300; 
+}
+h2 { 
+    font-size: 2.25rem; 
+    font-weight: 300; 
+}
+h3 { 
+    font-size: 1.75rem; 
+    font-weight: 300; 
+}
+
+/* Amélioration de l'accessibilité pour la navigation au clavier */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--secondary-color);
+    outline-offset: 3px;
+    border-radius: 4px; /* Rend l'outline plus joli */
+}
+
+span {
+    color: var(--text-muted-color)
+}
+
+
+/* =======================================================
+   3. CLASSES UTILITAIRES (Réutilisables partout)
+   ======================================================= */
+.container {
+    width: 90%;
+    max-width: 1100px; /* Largeur standard pour les grands écrans */
+    margin: 0 auto;    /* Centre le contenu */
+}
+
+.dark-bg {
+    background-color: var(--surface-color);
+    padding-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+}
+
+/* Cache un élément mais le garde pour les lecteurs d'écran */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+
+/* =======================================================
+   4. COMPOSANTS GÉNÉRIQUES (Boutons, Cartes...)
+   ======================================================= */
+
+/* --- Système de Boutons --- */
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px; /* Pour un look "pilule" moderne */
+    font-family: var(--font-primary);
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    color: var(--bg-color);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+
+/* =======================================================
+   5. STYLES SPÉCIFIQUES AU PROJET "UMAMI" (À COMPLÉTER)
+   ======================================================= */
+
+/* --- Header & Navigation --- */
+.main-header {
+    position: fixed; /* <- CHANGEMENT ICI */
+    top: 0;
+    left: 0; /* Ajout pour bien caler à gauche */
+    width: 100%;
+    z-index: 1000; /* Assure qu'il est au premier plan */
+
+    /* Le reste de tes styles est bon */
+    background-color: var(--bg-color); /* Note: --navbar-bg n'était pas défini, j'ai mis --bg-color */
+    padding: var(--spacing-sm);
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1); /* Ombre plus subtile */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px; /* Hauteur fixe pour un bon alignement */
+}
+
+/* --- Le Logo Centré --- */
+.nav-logo {
+    position: absolute; /* Permet un centrage parfait */
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-primary);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--navbar-text);
+    text-transform: uppercase;
+}
+
+.nav-logo:hover {
+    color: var(--primary-color);
+}
+
+
+/* --- Le Bouton Hamburger (Visible sur mobile) --- */
+.hamburger {
+    display: flex; /* Utilise flex pour centrer les barres */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 2rem;
+    height: 2rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10; /* Pour qu'il soit au-dessus de tout */
+}
+
+.bar {
+    display: block;
+    width: 2rem;
+    height: 3px;
+    background-color: var(--text-color);
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+
+/* --- Le Menu de Navigation (Caché sur mobile) --- */
+.nav-menu {
+    list-style: none;
+    position: fixed; /* Sort du flux normal pour devenir un panneau latéral */
+    left: -100%; /* Caché par défaut en dehors de l'écran */
+    top: 0;
+    width: 80%; /* Prend 80% de la largeur de l'écran */
+    max-width: 300px; /* mais pas plus de 300px */
+    height: 100vh;
+    background-color: var(--bg-color); /* Utilise le fond sombre de ton thème */
+    padding-top: var(--spacing-xxl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: left 0.3s ease-in-out;
+    z-index: 5;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Ombre subtile pour le relief */
+}
+
+.nav-item {
+    margin-bottom: var(--spacing-lg);
+}
+
+.nav-link {
+    font-family: var(--font-primary);
+    font-size: 1.5rem;
+    color: var(--text-color); /* Texte clair sur fond sombre */
+}
+
+
+/* --- Styles quand le menu est ACTIF (via JavaScript) --- */
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0; /* La barre du milieu disparaît */
+}
+.hamburger.active .bar:nth-child(1) {
+    transform: translateY(11px) rotate(45deg); /* La barre du haut tourne */
+}
+.hamburger.active .bar:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg); /* La barre du bas tourne */
+}
+
+.nav-menu.active {
+    left: 0; /* Fait apparaître le menu */
+}
+
+
+
+/* --- Section Hero --- */
+.hero {
+   height: calc(100vh - 60px); /* Prend toute la hauteur de la fenêtre moins la navbar */
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+   padding: 0 var(--spacing-sm);
+}
+.hero-korean{
+    color: var(--text-muted-color);
+}
+
+.hero-subtitle-desktop{
+    display: none;
+}
+
+
+
+/* --- Section Réservation --- */
+.reservation {
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: var(--spacing-xl) var(--spacing-sm);
+    background-color: var(--secondary-color);
+}
+
+.reservation p{
+    margin-bottom: var(--spacing-lg);
+}
+
+
+
+/* --- Section Recommendations --- */
+.highlights {
+    width: 100%;
+    padding: var(--spacing-xl) var(--spacing-sm);
+    text-align: center;
+}
+
+.slider-container {
+    position: relative; /* Contexte pour les boutons */
+}
+
+.slider-wrapper {
+    display: flex;
+    /* Active le défilement horizontal */
+    overflow-x: auto; 
+    /* Cache la barre de défilement pour un look plus propre */
+    scrollbar-width: none; /* Pour Firefox */
+    -ms-overflow-style: none;  /* Pour Internet Explorer 10+ */
+    
+    /* Améliore l'expérience de swipe en "calant" les éléments */
+    scroll-snap-type: x mandatory;
+    
+    /* Ajoute un peu d'espace sur les côtés pour ne pas coller au bord */
+    padding-bottom: var(--spacing-md); /* Espace pour l'ombre des cartes */
+}
+
+.slider-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.highlights-grid {
+    display: flex; /* Aligne les cartes horizontalement */
+    flex-wrap: nowrap; /* Empêche le retour à la ligne */
+    gap: var(--spacing-md); /* Espace entre les cartes */
+}
+
+.highlight-item {
+    /* Chaque carte prend 80% de la largeur sur mobile, sans rétrécir */
+    flex: 0 0 78%; 
+    scroll-snap-align: start; /* Cale le début de chaque carte lors du swipe */
+
+    /* Styles pour les cartes (à adapter selon ton design) */
+    background-color: var(--secondary-color);
+    border-radius: 16px;
+    padding: var(--spacing-md);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.highlight-item h4{
+    font-family: 1.5rem;
+    font-weight: 500;
+}
+
+.highlight-item-korean{
+    margin-top: var(--spacing-xs);
+    color: var(--text-muted-color);
+}
+
+.highlight-item-ingredients{
+    font-size: 0.9rem;
+    font-weight: 300;
+    margin-bottom: var(--spacing-sm);
+}
+
+.highlight-item-price{
+    color: var(--text-muted-color);
+    font-weight: 200;
+    margin-top: var(--spacing-sm);
+    font-size: 1.2rem;
+}
+
+/* --- Section Menu --- */
+.menu {
+    margin: var(--spacing-xl) 0;
+}
+.main-menu img{
+    width: 100%;
+    margin-bottom: var(--spacing-md);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.main-menu {
+    margin-bottom: var(--spacing-xl);
+}
+
+.main-menu h3{
+    margin-bottom: var(--spacing-lg);
+    font-size: 2.25rem; 
+    font-weight: 300;
+    text-align: center;
+}
+
+.menu-titleprice {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline; /* Aligne le texte sur la même ligne de base */
+    font-family: var(--font-primary);
+    font-size: 1.3rem;
+    font-weight: 400;
+
+    /* La magie commence ici */
+    position: relative; /* Indispensable pour positionner la ligne de pointillés */
+    overflow: hidden; /* Empêche les pointillés de déborder */
+}
+
+.menu-titleprice::after {
+    content: '';
+    position: absolute;
+    bottom: 4px; /* Ajuste la hauteur verticale des points */
+    left: 0;
+    width: 100%;
+    border-bottom: 2px dotted grey; /* Style des pointillés */
+}
+
+.menu-item-title, .menu-item-price {
+    position: relative;
+    z-index: 1; /* S'assure que le texte est AU-DESSUS des pointillés */
+    background-color: var(--bg-color); /* DOIT être la même couleur que le fond de ton site ! */
+}
+
+.menu-item-title {
+    padding-right: 0.5rem; 
+}
+
+.menu-item-price {
+    padding-left: 0.5rem;
+}
+
+.menu-item-ingredients {
+    line-height: 1rem;
+    color: grey;
+}
+
+/* --- Section A propos --- */
+.about-us {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--spacing-xl) 0;
+}
+
+.about-us-text h2{
+    margin: var(--spacing-xl) 0;
+}
+
+.about-us-text p{
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+/* --- Section A propos --- */
+.main-footer {
+    background-color: var(--surface-color);
+    color: var(--secondary-color);
+    text-align: center;
+    padding: var(--spacing-xl) 0;
+    font-size: 0.9rem;
+}
+
+.main-footer h4 {
+    color: var(--text-muted-color);
+
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.footer-bottom {
+    margin-top: var(--spacing-lg);
+    border-top: 1px solid #444;
+    padding-top: var(--spacing-sm);
+    font-size: 0.8rem;
+    color: var(--text-muted-color);
+}
+
+.footer-bottom a {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* =======================================================
+   6. MEDIA QUERIES (Pour le Responsive Design)
+   ======================================================= */
+
+/* Pour les tablettes (et plus grand) */
+@media (min-width: 768px) {
+    h1 { font-size: 3.5rem; }
+    h2 { font-size: 2.75rem; }
+
+    /* On cache l'icône hamburger */
+    .hamburger {
+        display: none;
+    }
+
+    /* Le logo n'est plus centré de manière absolue */
+    .nav-logo {
+        position: static;
+        transform: none;
+        order: 1; /* Permet de réorganiser les éléments flex */
+    }
+
+    /* La navbar est réorganisée pour un affichage classique */
+    .navbar {
+        justify-content: space-between;
+        padding: 0 var(--spacing-md);
+    }
+
+    /* Le menu de navigation redevient visible et horizontal */
+    .nav-menu {
+        position: static;
+        left: auto;
+        top: auto;
+        width: auto;
+        height: auto;
+        background-color: transparent;
+        padding-top: 0;
+        flex-direction: row;
+        gap: var(--spacing-md); /* Espace entre les liens */
+        order: 2; /* Menu à droite */
+        box-shadow: none;
+    }
+
+    .nav-item {
+        margin-bottom: 0;
+    }
+
+    .nav-link {
+        font-size: 1rem;
+        color: var(--navbar-text);
+        white-space: nowrap;
+    }
+
+    .nav-link:hover {
+        color: var(--primary-color);
+    }
+
+    .highlight-item {
+        /* Sur les grands écrans, on fixe la largeur des cartes */
+        flex-basis: 320px; 
+    }
+
+}
+
+/* Pour les ordinateurs (et plus grand) */
+@media (min-width: 1024px) {
+    .footer-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    /* --- Mise en page Desktop pour la section Menu --- */
+    .menu,
+     .about-us {
+        padding: var(--spacing-sm)
+    }
+
+    .main-menu {
+        display: flex;
+        align-items: center; /* <-- Cette propriété est la clé pour le centrage vertical */
+        gap: var(--spacing-xl);
+        margin-bottom: var(--spacing-xxl);
+    }
+
+    /* On applique les styles au conteneur de texte ET à l'image */
+    .main-menu .menu-container,
+    .main-menu img {
+        flex: 1 1 50%; /* On leur donne une base flexible de 50% */
+    }
+
+    /* On s'assure que l'image ne se déforme pas */
+    .main-menu img {
+        width: 100%; /* S'assure que l'image est responsive dans son conteneur */
+        max-height: 500px; /* Optionnel : Limite la hauteur de l'image pour éviter qu'elle soit immense */
+        object-fit: cover;
+    }
+
+    /* On inverse l'ordre pour le 2ème menu (image à droite) */
+    .main-menu:nth-child(2) {
+        flex-direction: row-reverse;
+    }
+
+    .main-menu h3 {
+        text-align: left;
+    }
+
+
+    /* --- Mise en page Desktop pour la section A Propos --- */
+    .about-us {
+        flex-direction: row; /* On passe en affichage horizontal */
+        text-align: left;
+        gap: var(--spacing-xl);
+    }
+
+    .about-us-image,
+    .about-us-text {
+        flex: 1; /* Chaque partie prend 50% de l'espace */
+    }
+    
+    .about-us-text h2 {
+        margin-top: 0; /* On retire la marge du haut qui n'est plus nécessaire */
+    }
+    
+    .about-us-text p {
+        margin: 0; /* On retire les marges automatiques */
+    }
+
+}

@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umami - Restaurant Fusion Asiatique</title>
+    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="navbar">
+            <button class="hamburger" aria-label="Ouvrir le menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <a href="#" class="nav-logo">UMAMI</a>
+
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#hero" class="nav-link">Accueil</a></li>
+                <li class="nav-item"><a href="#menu" class="nav-link">Menu</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">À Propos</a></li>
+                <li class="nav-item"><a href="#schedule" class="nav-link">Réservation</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero container" id="hero">
+            <div class="hero-content">
+                <p class="hero-korean">한국 요리</p>
+                <h1 class="hero-title">Recettes <span>traditionnelles coréennes</span>  pour votre plus grand plaisir</h1>
+                <p class="hero-subtitle-desktop">Ressentez l'esprit de la Corée dans chaque plat</p>
+                <a href="#menu" class="btn btn-secondary">Voir le menu</a>
+            </div>
+        </section>
+
+        <section class="reservation" id="schedule">
+            <div class="container">
+                <h2>Réservez Votre Table</h2>
+                <p>Vivez une soirée inoubliable.<br>Les places sont limitées.</p>
+                <a href="#" class="btn btn-primary">Réserver en ligne</a>
+            </div>
+        </section>
+
+        <section class="highlights container">
+            <h2>Nos <span>Incontournables</span></h2>
+
+            <div class="slider-container">
+
+        <div class="slider-wrapper">
+
+            <div class="highlights-grid">
+                <div class="highlight-item">
+                    <img src="{% static 'img/plat1.png' %}" alt="Bibimbap coréen">
+                    <p class="highlight-item-korean">비빔밥</p>
+                    <h4>Bibimbap au Boeuf</h4>
+                    <p class="highlight-item-ingredients">Riz, boeuf mariné, légumes variés, oeuf au plat, sauce gochujang</p>
+                    <p class="highlight-item-price">19€</p>
+                </div>
+                <div class="highlight-item">
+                    <img src="{% static 'img/plat1.png' %}" alt="Kimchi Jjigae">
+                    <p class="highlight-item-korean">김치찌개</p>
+                    <h4>Ragoût de Kimchi</h4>
+                    <p class="highlight-item-ingredients">Kimchi fermenté, tofu soyeux, poitrine de porc, ciboule</p>
+                    <p class="highlight-item-price">17€</p>
+                </div>
+                <div class="highlight-item">
+                    <img src="{% static 'img/plat1.png' %}" alt="Bulgogi">
+                    <p class="highlight-item-korean">불고기</p>
+                    <h4>Bulgogi Traditionnel</h4>
+                    <p class="highlight-item-ingredients">Fines tranches de boeuf marinées à la sauce soja et poire</p>
+                    <p class="highlight-item-price">22€</p>
+                </div>
+            </div>
+        </div>
+            </div>
+        </section>
+
+        <section class="menu" id="menu">
+            <div class="main-menu">
+                <img src="{% static 'img/menu_01.jpg' %}" alt="Plat coréen">
+                <div class="menu-container container">
+                    <h3>Plats Principaux</h3>
+                    {% for dish in dishes %}
+                    <div class="menu-item">
+                        <div class="menu-titleprice">
+                            <p class="menu-item-title">{{ dish.name }}</p>
+                            <p class="menu-item-price">{{ dish.price }}€</p>
+                        </div>
+                        <p class="menu-item-ingredients">{{ dish.description }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="main-menu">
+                <img src="{% static 'img/menu_02.jpg' %}" alt="Plat coréen">
+                <div class="menu-container container">
+                    <h3>Soupes & Ramens</h3>
+                    {% for soup in soups %}
+                    <div class="menu-item">
+                        <div class="menu-titleprice">
+                            <p class="menu-item-title">{{ soup.name }}</p>
+                            <p class="menu-item-price">{{ soup.price }}€</p>
+                        </div>
+                        <p class="menu-item-ingredients">{{ soup.description }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section class="about-us" id="about">
+            <div class="about-us-image">
+                <img src="{% static 'img/chef.jpg' %}" alt="Le chef préparant un plat">
+            </div>
+            <div class="about-us-text container">
+                <h2>Notre Histoire</h2>
+                <p>
+                    Umami est né d'une passion : marier la richesse des saveurs coréennes, inspirées des recettes de notre grand-mère à Séoul, avec l'excellence des produits frais de notre terroir d'Occitanie.
+                    <br><br>
+                    Chaque plat est une conversation entre ces deux cultures, une invitation à un voyage gustatif authentique et moderne. Bienvenue chez nous.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="main-footer dark-bg">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>UMAMI</h4>
+                    <p>Votre destination pour la cuisine fusion.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p>123 Rue Fictive, 31000 Toulouse</p>
+                    <p>contact@umami-restaurant.fr</p>
+                    <p>05 01 02 03 04</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Horaires</h4>
+                    <p>Mardi - Samedi</p>
+                    <p>12:00 - 14:00 | 19:00 - 22:00</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Umami. Tous droits réservés. Un projet de portfolio par <a href="www.clementlazzarini.com">Clément Lazzarini</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>

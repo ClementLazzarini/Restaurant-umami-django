@@ -1,0 +1,19 @@
+# Fichiers Python
+__pycache__/
+*.pyc
+
+# Environnement virtuel
+venv/
+
+# Fichiers de configuration locaux
+.env
+
+# Base de données locale
+db.sqlite3
+*.sqlite3
+
+# Fichiers de médias uploadés par l'utilisateur
+/media/
+
+# Fichiers système
+.DS_Store
