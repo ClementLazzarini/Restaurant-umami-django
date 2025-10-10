@@ -21,7 +21,7 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
-
+@csrf_exempt
 def update_server(request):
     """
     Vue qui exécute un git pull et recharge le serveur web.
