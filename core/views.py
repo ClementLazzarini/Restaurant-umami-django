@@ -6,6 +6,7 @@ import subprocess
 from django.http import HttpResponse
 from django.conf import settings
 
+
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -31,19 +32,28 @@ def update_server(request):
     """
     # Chemin vers la racine de votre projet
     project_root = settings.BASE_DIR
-
-    # Commande 1 : Exécuter 'git pull'
     try:
         subprocess.check_output(['git', 'pull'], cwd=project_root, stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError as e:
         return HttpResponse(f"Erreur lors du git pull:\n{e.output.decode()}", status=500)
 
-    # Commande 2 : Recharger le serveur PythonAnywhere en "touchant" le fichier WSGI
+    # --- PARTIE 2 : RELOAD VIA L'API (modifiée) ---
     try:
-        wsgi_file_path = '/var/www/clemlazztech_pythonanywhere_com_wsgi.py'
-        with open(wsgi_file_path, 'a'):
-            os.utime(wsgi_file_path, None)
-    except Exception as e:
-        return HttpResponse(f"Erreur lors du rechargement du serveur:\n{str(e)}", status=500)
+        username = os.environ.get("PYTHONANYWHERE_USER", "ClemLazzTech")
+        domain_name = os.environ.get("PYTHONANYWHERE_DOMAIN", "clemlazztech.pythonanywhere.com")
 
-    return HttpResponse("Mise à jour réussie !")
+        # <-- CORRECTION ICI : On lit la clé depuis les settings
+        api_token = settings.PA_API_TOKEN
+
+        response = requests.post(
+            f'https://www.pythonanywhere.com/api/v0/user/{username}/webapps/{domain_name}/reload/',
+            headers={'Authorization': f'Token {api_token}'}
+        )
+
+        if response.status_code == 200:
+            return HttpResponse("Mise à jour et reload réussis via local_settings !")
+        else:
+            return HttpResponse(f"Erreur lors du reload via API: {response.status_code} - {response.text}", status=500)
+
+    except Exception as e:
+        return HttpResponse(f"Erreur inattendue lors du reload:\n{str(e)}", status=500)
