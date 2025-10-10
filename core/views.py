@@ -40,8 +40,7 @@ def update_server(request):
 
     # Commande 2 : Recharger le serveur PythonAnywhere en "touchant" le fichier WSGI
     try:
-        # Assurez-vous que ce chemin est correct (il l'est normalement)
-        wsgi_file_path = f'/var/www/{os.environ.get("PYTHONANYWHERE_DOMAIN")}_wsgi.py'
+        wsgi_file_path = '/var/www/clemlazztech_pythonanywhere_com_wsgi.py'
         with open(wsgi_file_path, 'a'):
             os.utime(wsgi_file_path, None)
     except Exception as e:
