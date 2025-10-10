@@ -6,6 +6,8 @@ import subprocess
 from django.http import HttpResponse
 from django.conf import settings
 
+from django.views.decorators.csrf import csrf_exempt
+
 
 # Create your views here.
 def index(request):
@@ -20,6 +22,7 @@ def index(request):
         'soups': soups
     }
     return render(request, 'index.html', context)
+
 
 @csrf_exempt
 def update_server(request):
