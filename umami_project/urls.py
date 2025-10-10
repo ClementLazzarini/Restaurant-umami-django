@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from core.views import index
+from core.views import index, update_server
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='home'),
+    path('update-server-a1b2c3d4-e5f6-7890-g1h2-i3j4k5l6m7n8/', update_server, name='update_server'),
 ]
