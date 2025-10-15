@@ -369,6 +369,17 @@ span {
     padding: var(--spacing-md);
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     text-align: center;
+    overflow: hidden;
+}
+
+.highlight-item img {
+    transition: transform 0.3s ease-in-out; /* Ajoute une transition douce à l'effet de zoom */
+    width: 100%; /* S'assure que l'image remplit le conteneur */
+    display: block; /* Supprime les espaces blancs sous l'image */
+}
+
+.highlight-item:hover img {
+    transform: scale(1.05); /* Applique un léger zoom de 5% au survol */
 }
 
 .highlight-item h4{
@@ -436,6 +447,14 @@ span {
     left: 0;
     width: 100%;
     border-bottom: 2px dotted grey; /* Style des pointillés */
+}
+
+.menu-item{
+    transition: color 0.2s ease-in-out;
+}
+
+.menu-item:hover{
+    color: var(--text-muted-color);
 }
 
 .menu-item-title, .menu-item-price {
