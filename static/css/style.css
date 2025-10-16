@@ -158,13 +158,14 @@ span {
 }
 
 .btn-secondary {
-    background-color: transparent;
+    background-color: var(--text-muted-color);
     color: var(--primary-color);
     border-color: var(--primary-color);
+    transition: transform 0.2s ease-in-out, color 0.3s ease;
 }
 
 .btn-secondary:hover {
-    background-color: var(--primary-color);
+    transform: scale(1.05);
     color: var(--text-color);
 }
 
@@ -586,7 +587,7 @@ span {
     }
 
     .nav-link:hover {
-        color: var(--primary-color);
+        color: var(--text-muted-color);
     }
 
     .highlight-item {
